@@ -13,9 +13,9 @@ class TaskList extends HTMLElement{
      super();
      this.attachShadow({ mode: 'open'});
      this.shadowRoot.appendChild(template.content.cloneNode(true));
-     this.shadowRoot.querySelector('#task').addEventListener('keydown', (e) => {
+     this.shadowRoot.querySelector('#task').addEventListener('keydown', async (e) => {
       if (e.keyCode == 13 && e.target.value.trim() != '') {
-        task.create(e.target.value.trim())
+        await task.create(e.target.value.trim())
         this.refreshList()
       }
      })
@@ -31,9 +31,9 @@ class TaskList extends HTMLElement{
   data.forEach(item => {
     let elem = document.createElement('li');
     elem.innerText = item
-    elem.addEventListener('click', (e) => {
+    elem.addEventListener('click', async (e) => {
       let index = Array.prototype.indexOf.call(list.childNodes, elem)
-      task.delete(index)
+      await task.delete(index)
       this.refreshList()
     })
     list.appendChild(elem)
