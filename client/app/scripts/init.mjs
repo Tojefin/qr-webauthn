@@ -1,3 +1,1 @@
-import task from "./task.mjs";
-
-export default window.addEventListener("load", task.get());
+export default window.addEventListener("load", () => console.log('Init'));

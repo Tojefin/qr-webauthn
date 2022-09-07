@@ -1,12 +1,27 @@
 var task = {
-  get: function() {
-    console.log("get");
+  get: async function() {
+    let response = await fetch('/api/task', {
+      method: 'GET'
+    })
+    return await response.json()
   },
-  create: function() {
 
+  create: async function(text) {
+    let response = await fetch('/api/task', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({text})
+    })
+    return await response.json()
   },
-  delete: function() {
 
+  delete: async function(id) {
+    let response = await fetch('/api/task/'+id, {
+      method: 'DELETE',
+    })
+    return await response.json()
   }
 };
 

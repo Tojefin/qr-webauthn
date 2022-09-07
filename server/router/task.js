@@ -1,16 +1,19 @@
+import db from "../index.js";
 import express from "express";
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.send('get');
+  res.send(db);
 });
 
 router.post('/', function(req, res) {
-  res.send('create');
+  db.push(req.body.text)
+  res.json({created: req.body.text})
 });
 
-router.delete('/', function(req, res) {
-  res.send('delete');
+router.delete('/:id', function(req, res) {
+  let del = db.splice(req.params.id, 1)
+  res.json({deleted: del, id: req.params.id})
 });
 
 export default router;
